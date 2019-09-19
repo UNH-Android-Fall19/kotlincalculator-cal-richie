@@ -2,7 +2,7 @@
     <string name="app_name">Cal</string>
     <string name="CE">CE</string>
     <string name="leftBracket">(</string>
-    <string name="RightBracket">Cal</string>
+    <string name="RightBracket">)</string>
     <string name="Slash">/</string>
     <string name="zero">0</string>
     <string name="one">1</string>
@@ -20,5 +20,7 @@
     <string name="star">*</string>
     <string name="equal">=</string>
     <string name="dot">.</string>
+    <string name="BackSpace">C</string>
+    <string name="description"> </string>
 
 </resources>

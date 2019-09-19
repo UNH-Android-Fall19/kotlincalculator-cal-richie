@@ -1,6 +1,12 @@
 package edu.newhaven.cal
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.view.*
+import net.objecthunter.exp4j.ExpressionBuilder
+import java.lang.Exception
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity() {
 
@@ -8,74 +14,90 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-     /*   This is the copied code i am working on my own version
+        /*Arithmetic functions calls, also passing boolean as true for value */
+        tvOne.setOnClickListener {Append_Arthematic_Experssion(string = "1", clear_Expression = true)}
+        tvTwo.setOnClickListener {Append_Arthematic_Experssion(string = "2", clear_Expression = true)}
+        tvThree.setOnClickListener {Append_Arthematic_Experssion(string = "3", clear_Expression = true)}
+        tvFour.setOnClickListener {Append_Arthematic_Experssion(string = "4", clear_Expression = true)}
+        tvFive.setOnClickListener {Append_Arthematic_Experssion(string = "5", clear_Expression = true)}
+        tvSix.setOnClickListener {Append_Arthematic_Experssion(string = "6", clear_Expression = true)}
+        tvSeven.setOnClickListener {Append_Arthematic_Experssion(string = "7", clear_Expression = true)}
+        tvEight.setOnClickListener {Append_Arthematic_Experssion(string = "8", clear_Expression = true)}
+        tvNine.setOnClickListener {Append_Arthematic_Experssion(string = "9", clear_Expression = true)}
+        tvZero.setOnClickListener{Append_Arthematic_Experssion(string = "0", clear_Expression = true)}
+        tvDot.setOnClickListener{Append_Arthematic_Experssion(string = ".", clear_Expression = true)}
 
-     //Numbers
-        tvOne.setOnClickListener { appendOnExpresstion("1", true) }
-        tvTwo.setOnClickListener { appendOnExpresstion("2", true) }
-        tvThree.setOnClickListener { appendOnExpresstion("3", true) }
-        tvFour.setOnClickListener { appendOnExpresstion("4", true) }
-        tvFive.setOnClickListener { appendOnExpresstion("5", true) }
-        tvSix.setOnClickListener { appendOnExpresstion("6", true) }
-        tvSeven.setOnClickListener { appendOnExpresstion("7", true) }
-        tvEight.setOnClickListener { appendOnExpresstion("8", true) }
-        tvNine.setOnClickListener { appendOnExpresstion("9", true) }
-        tvZero.setOnClickListener { appendOnExpresstion("0", true) }
-        tvDot.setOnClickListener { appendOnExpresstion(".", true) }
 
-        //Operators
-        tvPlus.setOnClickListener { appendOnExpresstion("+", false) }
-        tvMinus.setOnClickListener { appendOnExpresstion("-", false) }
-        tvMul.setOnClickListener { appendOnExpresstion("*", false) }
-        tvDivide.setOnClickListener { appendOnExpresstion("/", false) }
-        tvOpen.setOnClickListener { appendOnExpresstion("(", false) }
-        tvClose.setOnClickListener { appendOnExpresstion(")", false) }
+        /*Operation Function calls, also passing boolean as false for operators */
+        tvEquals.setOnClickListener{Append_Arthematic_Experssion(string = "0", clear_Expression = true)}
+        tvOpen.setOnClickListener{Append_Arthematic_Experssion(string = "(", clear_Expression = false)}
+        tvClose.setOnClickListener{Append_Arthematic_Experssion(string = ")", clear_Expression = false)}
+        tvDivide.setOnClickListener{Append_Arthematic_Experssion(string = "/", clear_Expression = false)}
+        tvMul.setOnClickListener{Append_Arthematic_Experssion(string = "*", clear_Expression = false)}
+        tvPlus.setOnClickListener{Append_Arthematic_Experssion(string = "+", clear_Expression = false)}
+        tvMinus.setOnClickListener{Append_Arthematic_Experssion(string = "-", clear_Expression = false)}
 
-        tvClear.setOnClickListener {
-            tvExpression.text = ""
-            tvResult.text = ""
-        }
 
-        tvBack.setOnClickListener {
+
+       tvClear.setOnClickListener{
+           val resultString = tvResult.text.toString()
+           val expressionString = tvExpression.text.toString()
+           if(resultString.isNotEmpty() or expressionString.isNotEmpty()){
+               tvExpression.text = ""
+               tvResult.text = ""
+           }
+
+       }
+
+
+
+
+        tvBack.setOnClickListener{
             val string = tvExpression.text.toString()
             if(string.isNotEmpty()){
                 tvExpression.text = string.substring(0,string.length-1)
             }
-            tvResult.text = ""
+            tvResult.text= ""
         }
 
-        tvEquals.setOnClickListener {
-            try {
 
+        tvEquals.setOnClickListener{
+            try {
                 val expression = ExpressionBuilder(tvExpression.text.toString()).build()
                 val result = expression.evaluate()
-                val longResult = result.toLong()
-                if(result == longResult.toDouble())
-                    tvResult.text = longResult.toString()
+                val longresult = result.toLong()
+                if(result == longresult.toDouble())
+                    tvResult.text = longresult.toString()
                 else
                     tvResult.text = result.toString()
 
             }catch (e:Exception){
-                Log.d("Exception"," message : " + e.message )
+                Log.d("Execption", "message: "+e.message)
             }
         }
 
-    }
 
-    fun appendOnExpresstion(string: String, canClear: Boolean) {
+
+    }
+    /*The below function is used to append new calculations and boolean is used to clear them once
+     '=' to is entered to show the result in its place */
+    fun Append_Arthematic_Experssion(string: String, clear_Expression : Boolean){
 
         if(tvResult.text.isNotEmpty()){
-            tvExpression.text = ""
+            tvExpression.text =""
         }
-
-        if (canClear) {
+        if(clear_Expression){
             tvResult.text = ""
             tvExpression.append(string)
-        } else {
+        }
+        else{
             tvExpression.append(tvResult.text)
             tvExpression.append(string)
             tvResult.text = ""
-        }  */
+        }
+
+
     }
 }
+
 

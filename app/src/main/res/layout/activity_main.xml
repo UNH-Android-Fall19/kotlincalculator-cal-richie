@@ -163,8 +163,9 @@
             <ImageView
                 android:id="@+id/tvBack"
                 style="@style/NumberButtonStyle"
+                android:src="@drawable/backspace"
                 android:scaleType="center"
-                android:src=""/>
+                android:contentDescription="@string/description" />
 
             <TextView
                 android:id="@+id/tvEquals"
